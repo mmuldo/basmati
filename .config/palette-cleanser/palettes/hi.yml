@@ -1,0 +1,11 @@
+!!python/object:palettecleanser.palette.Palette
+colors:
+- !!python/object:palettecleanser.palette.Color
+  blue: 15
+  green: 10
+  red: 0
+- !!python/object:palettecleanser.palette.Color
+  blue: 5
+  green: 10
+  red: 40
+name: hi

@@ -1,0 +1,8 @@
+!!python/object:palettecleanser.theme.Theme
+image_path: test_data/muruusa-mountain.jpg
+name: hello
+palettes:
+- hi
+- test
+settings:
+  blah: 1

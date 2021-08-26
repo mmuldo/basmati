@@ -1,0 +1,7 @@
+!!python/object:palettecleanser.theme.Theme
+image_path: ''
+name: test-theme
+palettes: !!python/tuple
+- muruusa2
+- hi
+settings: {}

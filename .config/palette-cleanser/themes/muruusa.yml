@@ -1,0 +1,8 @@
+!!python/object:palettecleanser.theme.Theme
+image_path: /home/matt/.background
+name: muruusa
+palettes:
+- muruusa
+- muruusa-dark
+- muruusa-light
+settings: {}

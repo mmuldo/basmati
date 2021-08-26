@@ -1,0 +1,35 @@
+!!python/object:palettecleanser.palette.Palette
+colors:
+- !!python/object:palettecleanser.palette.Color
+  blue: 25
+  green: 30
+  red: 15
+- !!python/object:palettecleanser.palette.Color
+  blue: 24
+  green: 20
+  red: 123
+- !!python/object:palettecleanser.palette.Color
+  blue: 68
+  green: 76
+  red: 65
+- !!python/object:palettecleanser.palette.Color
+  blue: 88
+  green: 103
+  red: 176
+- !!python/object:palettecleanser.palette.Color
+  blue: 97
+  green: 54
+  red: 63
+- !!python/object:palettecleanser.palette.Color
+  blue: 109
+  green: 76
+  red: 173
+- !!python/object:palettecleanser.palette.Color
+  blue: 110
+  green: 86
+  red: 68
+- !!python/object:palettecleanser.palette.Color
+  blue: 172
+  green: 166
+  red: 177
+name: muruusa

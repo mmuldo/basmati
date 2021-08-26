@@ -1,0 +1,35 @@
+!!python/object:palettecleanser.palette.Palette
+colors:
+- !!python/object:palettecleanser.palette.Color
+  blue: 0
+  green: 0
+  red: 0
+- !!python/object:palettecleanser.palette.Color
+  blue: 34
+  green: 7
+  red: 168
+- !!python/object:palettecleanser.palette.Color
+  blue: 1
+  green: 198
+  red: 47
+- !!python/object:palettecleanser.palette.Color
+  blue: 0
+  green: 151
+  red: 205
+- !!python/object:palettecleanser.palette.Color
+  blue: 127
+  green: 0
+  red: 0
+- !!python/object:palettecleanser.palette.Color
+  blue: 204
+  green: 12
+  red: 175
+- !!python/object:palettecleanser.palette.Color
+  blue: 182
+  green: 171
+  red: 0
+- !!python/object:palettecleanser.palette.Color
+  blue: 160
+  green: 195
+  red: 191
+name: vibrant

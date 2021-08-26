@@ -1,0 +1,31 @@
+!!python/object:palettecleanser.palette.Palette
+colors:
+- !!python/object:palettecleanser.palette.Color
+  blue: 0
+  green: 0
+  red: 0
+- !!python/object:palettecleanser.palette.Color
+  blue: 30
+  green: 30
+  red: 30
+- !!python/object:palettecleanser.palette.Color
+  blue: 60
+  green: 60
+  red: 60
+- !!python/object:palettecleanser.palette.Color
+  blue: 90
+  green: 90
+  red: 90
+- !!python/object:palettecleanser.palette.Color
+  blue: 120
+  green: 120
+  red: 120
+- !!python/object:palettecleanser.palette.Color
+  blue: 150
+  green: 150
+  red: 150
+- !!python/object:palettecleanser.palette.Color
+  blue: 180
+  green: 180
+  red: 180
+name: test_template_palette0
