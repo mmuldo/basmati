@@ -1,2 +1,4 @@
 managed_files:
   - .config/alacritty/alacritty.yml
+  - .config/rofi/config.rasi
+  - .config/rofi/launcher.rasi

@@ -5,4 +5,5 @@ palettes:
 - muruusa
 - muruusa-dark
 - muruusa-light
-settings: {}
+settings:
+  font: Iosevka Nerd Font

@@ -3,13 +3,13 @@ env:
 
 font:
   normal:
-    family: Iosevka Nerd Font
+    family: {{ settings.font }}
   bold:
-    family: Iosevka Nerd Font
+    family: {{ settings.font }}
   italic:
-    family: Iosevka Nerd Font
+    family: {{ settings.font }}
   bold_italic:
-    family: Iosevka Nerd Font
+    family: {{ settings.font }}
   size: 12
 
 draw_bold_text_with_bright_colors: true
@@ -22,7 +22,7 @@ selection:
 live_config_reload: true
 colors:
   primary:
-    background: "{{ palettes[0].colors[0] }}"
+    background: "{{ palettes[1].colors[0] }}"
     foreground: "{{ palettes[0].colors[7] }}"
   cursor:
     text: CellBackground
@@ -54,7 +54,7 @@ colors:
     text: CellBackground
     background: CellForeground
   normal:
-    black:   "{{ palettes[1].colors[0] }}"
+    black:   "{{ palettes[0].colors[0] }}"
     red:     "{{ palettes[0].colors[1] }}"
     green:   "{{ palettes[0].colors[2] }}"
     yellow:  "{{ palettes[0].colors[3] }}"
