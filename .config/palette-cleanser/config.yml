@@ -3,3 +3,4 @@ managed_files:
   - .config/rofi/config.rasi
   - .config/rofi/launcher.rasi
   - .xmonad/xmonad.hs
+  - .zshrc
