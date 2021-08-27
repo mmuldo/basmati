@@ -1,0 +1,124 @@
+import XMonad
+import XMonad.Util.EZConfig (additionalKeysP)
+import XMonad.Actions.WithAll
+import XMonad.Layout.Gaps
+import XMonad.Layout.Spacing
+import XMonad.Hooks.ManageDocks
+import XMonad.Layout.NoBorders
+import XMonad.Actions.PhysicalScreens
+import qualified XMonad.StackSet as W
+
+myTerminal = "alacritty"
+
+myFocusFollowsMouse = True
+
+myClickJustFocuses = False
+
+myNormalBorderColor = "{{ palettes[2].colors[0] }}"
+
+myFocusedBorderColor = "{{ palettes[2].colors[6] }}"
+
+myModMask = mod4Mask
+
+myBorderWidth = 2
+
+myWorkspaces = map show [1..9]
+
+myStartupHook = do
+  spawn "displays.sh"
+  spawn "feh --bg-fill {{ image_path }} --bg-fill {{ image_path }}"
+
+myLayoutHook = gaps myInitialGaps $ spacingRaw False (Border 10 10 10 10) True (Border 10 10 10 10) True $ smartBorders $ myLayout
+
+myLayout = avoidStruts $ myDefaultLayout ||| Mirror myDefaultLayout ||| Full
+
+myDefaultLayout = Tall numberOfMasters resizeIncrement masterRatio
+  where
+    numberOfMasters = 1
+    resizeIncrement = 3/100
+    masterRatio = 1/2
+
+myInitialGaps = [(L,30), (R,30), (U,40), (D,60)]
+
+myKeys =
+  [
+  -- quit xmonad
+    ("M-S-q", spawn "~/.config/rofi/on")
+
+  -- recompile + restart xmonad
+  , ("M-C-S-r", spawn "xmonad --recompile; xmonad --restart")
+
+  -- terminal
+  , ("M-<Return>", spawn $ myTerminal)
+
+  -- rofi (app launcher)
+  , ("M-d", spawn "rofi -show drun -modi run,drun")
+
+  -- audio
+  , ("<XF86AudioRaiseVolume>", spawn "amixer -D pulse sset Master 1%+")
+  , ("<XF86AudioLowerVolume>", spawn "amixer -D pulse sset Master 1%-")
+  , ("<XF86AudioMute>", spawn "amixer -D pulse sset Master toggle")
+
+  -- brightness
+  , ("<XF86MonBrightnessDown>", spawn "brightnessctl s 5-%")
+  , ("<XF86MonBrightnessUp>", spawn "brightnessctl s +5%")
+
+  -- kill window(s)
+  , ("M-S-c", kill)
+  , ("M-S-a", killAll)
+
+  -- window movement
+  , ("M-j", windows W.focusDown)
+  , ("M-S-j", windows W.swapDown)
+  , ("M-k", windows W.focusUp)
+  , ("M-S-k", windows W.swapUp)
+  , ("M-h", sendMessage Shrink)
+  , ("M-l", sendMessage Expand)
+  , ("M-n", refresh)
+
+  -- master window
+  , ("M-m", windows W.focusMaster)
+  , ("M-S-m", windows W.swapMaster)
+  , ("M-.", sendMessage $ IncMasterN 1)
+  , ("M-,", sendMessage $ IncMasterN (-1))
+
+  -- layout
+  , ("M-<Space>", sendMessage NextLayout)
+
+  -- passmenu
+  , ("M-p", spawn "passmenu")
+  ] ++
+
+  -- gaps
+  [ ("M-g", sendMessage $ ToggleGaps)
+  , ("M-S-g", sendMessage $ setGaps myInitialGaps)
+  ] ++
+  [ (preModMask ++ "M-" ++  key, sendMessage $ action 10 direction) |
+    (direction, key) <- zip [L, D, U, R] ["t", "y", "u", "i"]
+    , (preModMask, action) <- [("", IncGap), ("S-", DecGap)]
+    ] ++
+
+  -- workspaces
+  [ (preModMask ++ "M-" ++ number, action workspace) |
+    (workspace, number) <- zip myWorkspaces $ map show [1..]
+    , (preModMask, action) <- [("", windows . W.greedyView), ("S-", windows . W.shift)]
+    ] ++
+
+  -- screens
+  [ (preModMask ++ "M-" ++ key, action screen) |
+    (screen, key) <- zip [0..] ["w", "e", "r"]
+    , (preModMask, action) <- [("", viewScreen horizontalScreenOrderer), ("S-", sendToScreen horizontalScreenOrderer)]
+    ]
+
+main = xmonad $ def
+  { terminal    = myTerminal
+  , modMask     = myModMask
+  , focusFollowsMouse = myFocusFollowsMouse
+  , clickJustFocuses = myClickJustFocuses
+  , normalBorderColor = myNormalBorderColor
+  , focusedBorderColor = myFocusedBorderColor
+  , borderWidth = myBorderWidth
+  , layoutHook = myLayoutHook
+  , workspaces = myWorkspaces
+  , startupHook = myStartupHook
+  } `additionalKeysP` myKeys
