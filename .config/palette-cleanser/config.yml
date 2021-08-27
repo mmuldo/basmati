@@ -1,5 +1,9 @@
 managed_files:
   - .config/alacritty/alacritty.yml
+  - .config/i3/config
+  - .config/polybar/config
+  - .config/polybar/colors
   - .config/rofi/config.rasi
   - .config/rofi/launcher.rasi
   - .xmonad/xmonad.hs
+  - .zshrc
