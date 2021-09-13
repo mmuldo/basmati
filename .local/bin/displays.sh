@@ -2,7 +2,7 @@
 
 display_list=($(xrandr -q | grep ' connected' | cut -d' ' -f1))
 
-[ ${#display_list[@]} -eq 2 ] && notify-send "hi"
+[ ${#display_list[@]} -eq 2 ]
 
 [ ${#display_list[@]} -eq 1 ] &&
     ~/.screenlayout/single.sh &&
