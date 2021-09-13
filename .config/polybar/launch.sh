@@ -4,12 +4,14 @@
 killall -q polybar
 sleep 1
 
-displays.sh
+~/.local/bin/displays.sh
 sleep 1
 
 for m in $(polybar --list-monitors | cut -d":" -f1); do
-    MONITOR=$m polybar --reload top &
-    MONITOR=$m polybar --reload bottom &
+    bars="datetime health status tray workspaces"
+    for bar in $bars; do
+        MONITOR=$m polybar -c ~/.config/polybar/config -r $bar &
+    done
 done
 
 notify-send "polybars launched"
