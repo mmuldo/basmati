@@ -1,28 +1,16 @@
 ## USEFUL COMMANDS:
 # xbindkeys -k  | gives you the key code for a pressed key or mouse button
 
-set $ws1 "1"
-set $ws2 "2"
-set $ws3 "3"
-set $ws4 "4"
-set $ws5 "5"
-set $ws6 "6"
-set $ws7 "7"
-set $ws8 "8 "
-set $ws9 "9"
-set $ws0 "0"
+{% for i in range(10) %}
+set $ws{{ i }} "{{ i }}"
+{% endfor %}
 
 #Needed for i3-gaps
 hide_edge_borders both
 for_window [class="^.*"] border pixel 4
-gaps inner  25
-gaps top    10
-gaps left   10
-gaps right  10
-gaps bottom 10
-
-# workspace $ws4 gaps left 400
-# gaps outer 17
+{% for direction, gap in {'inner': 25, 'top': 30, 'left': 10, 'right': 10, 'bottom': 30}.items() %}
+gaps {{ direction }}  {{ gap }}
+{% endfor %}
 
 ###################
 ## COLOR PALETTE ##
@@ -30,54 +18,23 @@ gaps bottom 10
 
 # [colors]
 # ===================== #
-set $bg {{ palettes[0].colors[0] }}
-set $fg {{ palettes[0].colors[7] }}
+# class                 border   backgr. text   indicator child_border
+{% for state, colors in {
+    'focused':          [(0, 3), (0, 3), (0, 0), (0, 1), (0, 3)],
+    'focused_inactive': [(0, 0), (0, 0), (0, 7), (0, 1), (0, 0)],
+    'unfocused':        [(0, 0), (0, 0), (0, 7), (0, 1), (0, 0)],
+    'urgent':           [(1, 1), (1, 1), (1, 0), (1, 1), (1, 1)],
+    'placeholder':      [(1, 0), (1, 0), (1, 7), (1, 0), (1, 0)]
+    }.items() %}
+client.{{ state }}      {% for p_idx, c_idx in colors %}{{ palettes[p_idx].colors[c_idx] }} {% endfor %}
 
-# blacks
-set $color0     {{ palettes[1].colors[0] }}
-set $color1     {{ palettes[0].colors[0] }}
-set $color2     {{ palettes[2].colors[0] }}
-set $color3     {{ palettes[1].colors[7] }}
-# whites
-set $color4     {{ palettes[2].colors[7] }}
-set $color5     {{ palettes[0].colors[7] }}
-set $color6     {{ palettes[2].colors[3] }}
+{% endfor %}
+client.background {{ palettes[0].colors[7] }}
 
-# ===================== #
-# blues
-# seafoam
-set $color7     {{ palettes[2].colors[6] }}
-# turquoise
-set $color8     {{ palettes[0].colors[6] }}
-# pastel
-set $color9     {{ palettes[2].colors[4] }}
-# blue
-set $color10    {{ palettes[0].colors[4] }}
-
-# ===================== #
-# red
-set $color11    {{ palettes[0].colors[1] }}
-# orange
-set $color12    {{ palettes[2].colors[3] }}
-# yellow
-set $color13    {{ palettes[0].colors[3] }}
-# green
-set $color14    {{ palettes[0].colors[2] }}
-# purple
-set $color15    {{ palettes[0].colors[5] }}
-
-# class                 border  backgr. text    indicator child_border
-client.focused          $color9 $color9 $color0 $color11  $color9
-client.focused_inactive $color1 $color1 $color4 $color11  $color1
-client.unfocused        $color1 $color1 $color4 $color11  $color1
-client.urgent           $bg     $bg     $fg     $bg       $bg
-client.placeholder      $bg     $bg     $fg     $bg       $bg
-client.background $fg
-
-# alt key, main modifier
-set $sup Mod1
-# windows key, secondary (super) modifier
+# windows key, main modifier
 set $mod Mod4
+# alt key, secondary (super) modifier
+set $sup Mod1
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -104,7 +61,7 @@ bindsym $mod+p exec passmenu
 bindsym $mod+o exec ~/.local/bin/copy-emoji
 
 ## alternative resize commands
-bindsym $mod+Shift+y resize shrink width 10 px or 10ppt
+bindsym $mod+Shift+y resize shrink width 10 px or 10 ppt
 bindsym $mod+Shift+u resize shrink height 10 px or 10 ppt
 bindsym $mod+Shift+o resize grow width 10 px or 10 ppt
 
@@ -154,23 +111,11 @@ bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
 
-# alternatively, you can use the cursor keys:
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
-
 # move focused window
 bindsym $mod+Shift+h move left
 bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
-
-# alternatively, you can use the cursor keys:
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
 bindsym $mod+Shift+v split h
@@ -200,29 +145,14 @@ bindsym $mod+a focus parent
 
 
 # switch to workspace
-bindsym $mod+1 workspace $ws1
-bindsym $mod+2 workspace $ws2
-bindsym $mod+3 workspace $ws3
-bindsym $mod+4 workspace $ws4
-bindsym $mod+5 workspace $ws5
-bindsym $mod+6 workspace $ws6
-bindsym $mod+7 workspace $ws7
-bindsym $mod+8 workspace $ws8
-bindsym $mod+9 workspace $ws9
-bindsym $mod+0 workspace $ws0
+{% for i in range(10) %}
+bindsym $mod+{{ i }} workspace $ws{{ i }}
+{% endfor %}
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace $ws1
-bindsym $mod+Shift+2 move container to workspace $ws2
-bindsym $mod+Shift+3 move container to workspace $ws3
-bindsym $mod+Shift+4 move container to workspace $ws4
-bindsym $mod+Shift+5 move container to workspace $ws5
-bindsym $mod+Shift+6 move container to workspace $ws6
-bindsym $mod+Shift+7 move container to workspace $ws7
-bindsym $mod+Shift+8 move container to workspace $ws8
-bindsym $mod+Shift+9 move container to workspace $ws9
-bindsym $mod+Shift+0 move container to workspace $ws0
-
+{% for i in range(10) %}
+bindsym $mod+Shift+{{ i }} move container to workspace $ws{{ i }}
+{% endfor %}
 
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
@@ -235,12 +165,6 @@ mode "resize" {
     bindsym j resize shrink height 20 px or 10 ppt
     bindsym k resize grow height 20 px or 10 ppt
     bindsym l resize grow width 20 px or 10 ppt
-
-    # same bindings, but for the arrow keys
-    bindsym Left resize shrink width 10 px or 10 ppt
-    bindsym Down resize grow height 10 px or 10 ppt
-    bindsym Up resize shrink height 10 px or 10 ppt
-    bindsym Right resize grow width 10 px or 10 ppt
 
     # back to normal: Enter or Escape
     bindsym Return mode "default"
@@ -271,9 +195,6 @@ bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 5
 ## move workspace to screen
 for_window [class="trust"] floating enable
 
-# spotify needs to be moved instead of assigned due to a bug with spotify
-for_window [class="Spotify"] move to workspace $ws0
-
 # FIREFOX
 # force private firefox windows to workspace 7
 for_window [title=".*\(Private Browsing\).*"] move to workspace $ws7
@@ -281,12 +202,25 @@ for_window [title=".*\(Private Browsing\).*"] move to workspace $ws7
 bindsym $mod+Shift+f exec --no-startup-id "firefox --private-window duckduckgo.com"; workspace $ws7
 # END FIREFOX
 
+{% for ws, screen in {
+    0: 'primary',
+    1: 'secondary',
+    2: 'primary',
+    3: 'secondary',
+    4: 'primary',
+    7: 'secondary'
+    }.items() %}
+workspace $ws{{ ws }} output {{ screen }}
+{% endfor %}
 
 ## startup applications
+exec_always --no-startup-id "feh --no-fehbg --bg-fill '/home/matt/.background' '/home/matt/.background'"
 exec_always --no-startup-id ~/.config/polybar/launch.sh
 exec --no-startup-id dropbox
-exec_always --no-startup-id "feh --no-fehbg --bg-fill '/home/matt/.background' '/home/matt/.background'"
-
 #exec --no-startup-id picom
-exec --no-startup-id spotify
 exec --no-startup-id dunst
+
+exec --no-startup-id spotify; workspace $ws0
+exec --no-startup-id emacs; workspace $ws1
+exec --no-startup-id alacritty; workspace $ws2
+exec --no-startup-id firefox; workspace $ws3
