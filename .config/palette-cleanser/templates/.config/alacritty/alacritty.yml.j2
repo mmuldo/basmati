@@ -10,11 +10,11 @@ font:
     family: {{ settings.font }}
   bold_italic:
     family: {{ settings.font }}
-  size: 9
+  size: 8
 
 draw_bold_text_with_bright_colors: true
 
-background_opacity: 1.0
+#background_opacity: 0.8
 
 selection:
   save_to_clipboard: false
@@ -51,32 +51,12 @@ colors:
     foreground: None
     background: None
   selection:
-    text: "{{ palettes[2].colors[6] }}"
-    background: "{{ palettes[1].colors[0] }}"
-  normal:
-    black:   "{{ palettes[0].colors[0] }}"
-    red:     "{{ palettes[0].colors[1] }}"
-    green:   "{{ palettes[0].colors[2] }}"
-    yellow:  "{{ palettes[0].colors[3] }}"
-    blue:    "{{ palettes[0].colors[4] }}"
-    magenta: "{{ palettes[0].colors[5] }}"
-    cyan:    "{{ palettes[0].colors[6] }}"
-    white:   "{{ palettes[0].colors[7] }}"
-  bright:
-    black:   "{{ palettes[2].colors[0] }}"
-    red:     "{{ palettes[2].colors[1] }}"
-    green:   "{{ palettes[2].colors[2] }}"
-    yellow:  "{{ palettes[2].colors[3] }}"
-    blue:    "{{ palettes[2].colors[4] }}"
-    magenta: "{{ palettes[2].colors[5] }}"
-    cyan:    "{{ palettes[2].colors[6] }}"
-    white:   "{{ palettes[2].colors[7] }}"
-  dim:
-    black:   "{{ palettes[1].colors[0] }}"
-    red:     "{{ palettes[1].colors[1] }}"
-    green:   "{{ palettes[1].colors[2] }}"
-    yellow:  "{{ palettes[1].colors[3] }}"
-    blue:    "{{ palettes[1].colors[4] }}"
-    magenta: "{{ palettes[1].colors[5] }}"
-    cyan:    "{{ palettes[1].colors[6] }}"
-    white:   "{{ palettes[1].colors[7] }}"
+    text: "{{ palettes[1].colors[0] }}"
+    background: "{{ palettes[2].colors[6] }}"
+
+{% for brightness, palette_index in {'normal': 0, 'bright': 2, 'dim': 1}.items() %}
+  {{ brightness}}:
+{%     for color in ['black', 'red', 'green', 'yellow', 'blue', 'magenta', 'cyan', 'white'] %}
+    {{ color }}: "{{ palettes[palette_index].colors[loop.index0] }}"
+{%     endfor %}
+{% endfor %}

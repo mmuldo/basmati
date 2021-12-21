@@ -214,7 +214,7 @@ workspace $ws{{ ws }} output {{ screen }}
 {% endfor %}
 
 ## startup applications
-exec_always --no-startup-id "feh --no-fehbg --bg-fill '/home/matt/.background' '/home/matt/.background'"
+exec_always --no-startup-id "feh --no-fehbg --bg-fill '{{ image_path }}' '{{ image_path }}'"
 exec_always --no-startup-id ~/.config/polybar/launch.sh
 exec --no-startup-id dropbox
 #exec --no-startup-id picom

@@ -12,9 +12,9 @@
 }
 
 #window {
-    border-color: @color8;
+    border-color: {{ palettes[0].colors[3] }};
     border: 4;
-    padding: 100px;
+    padding: 40px;
     background-color: @color0;
 }
 
@@ -28,12 +28,12 @@
 
 #prompt {
     background-color: @color0;
-    text-color: @color14;
+    text-color: {{ palettes[0].colors[1] }};
 }
 
 #entry {
     background-color: @color0;
-    text-color: @color11;
+    text-color: {{ palettes[0].colors[3] }};
 }
 
 #case-indicator {
@@ -43,11 +43,11 @@
 
 
 #element.selected.normal {
-    background-color: @color8;
+    background-color: {{ palettes[1].colors[7] }};
     text-color:       @color0;
 }
 
 #element.normal {
     background-color: @color0;
-    text-color:       @color8;
+    text-color:       {{ palettes[1].colors[7] }};
 }

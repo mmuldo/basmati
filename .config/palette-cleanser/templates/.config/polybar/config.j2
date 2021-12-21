@@ -10,7 +10,7 @@ offset-y = 10
 border-size = 3
 border-color = {{ palettes[0].colors[3] }}
 
-font-0 = {{ settings.font }}:size=12;3
+font-0 = {{ settings.font }}:size={{ settings.font_size }};3
 font-1 = Font Awesome 5 Brands Regular:style=Regular:size=12;3
 font-2 = Font Awesome 5 Free Solid:style=Solid:size=12;3
 font-3 = Font Awesome 5 Free Regular:style=Regular:size=12;3
@@ -45,7 +45,7 @@ offset-x = 1%
 
 [bar/workspaces]
 inherit = bar/base
-modules-center = i3
+modules-center = wm
 bottom = true
 width = 16%
 offset-x = 42%
@@ -105,6 +105,20 @@ ws-icon-{{ loop.index0 }} = {{ loop.index0 }};{{ icon }}
 {% endfor %}
 
 {% for state, p_idx, c_idx in [('focused', 0, 4), ('unfocused', 1, 4), ('visible', 1, 4), ('urgent', 0, 1)] %}
+{%     for key, value in {'-foreground': palettes[p_idx].colors[c_idx], '-padding': 1, '': '%icon%'}.items() %}
+label-{{ state }}{{ key }} = {{ value }}
+{%     endfor %}
+{% endfor %}
+
+[module/wm]
+type = internal/xworkspaces
+format = <label-state>
+
+{% for icon in ['', '', '', '', '', '', '', '', '', ''] %}
+icon-{{ loop.index0 }} = {{ loop.index0 }};{{ icon }}
+{% endfor %}
+
+{% for state, p_idx, c_idx in [('active', 0, 4), ('occupied', 1, 4), ('empty', 1, 4), ('urgent', 0, 1)] %}
 {%     for key, value in {'-foreground': palettes[p_idx].colors[c_idx], '-padding': 1, '': '%icon%'}.items() %}
 label-{{ state }}{{ key }} = {{ value }}
 {%     endfor %}

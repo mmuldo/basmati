@@ -1,7 +1,8 @@
 # If you come from bash you might have to change your $PATH.
 export GOPATH=~/go
 export GOBIN=$GOPATH/bin
-export PATH=$GOBIN:$HOME/.emacs.d/bin:$HOME/.local/bin:$PATH
+export PATH=$GOBIN:$HOME/.emacs.d/bin:$HOME/.local/bin:$HOME/.poetry/bin:$PATH
+export XDG_CONFIG_HOME=$HOME/.config
 
 # Path to your oh-my-zsh installation.
 export ZSH="/home/matt/.oh-my-zsh"
@@ -18,8 +19,9 @@ ZSH_THEME="agnoster"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  git
   archlinux
+  git
+  poetry
   zsh-autosuggestions
 )
 
@@ -47,9 +49,10 @@ alias gaa="git add -A"
 alias gcm="git commit -m"
 alias gs="git status"
 alias ls="exa"
-alias pclean="python -m cli"
-alias vv="vim ~/.vimrc"
-alias vz="vim ~/.zshrc"
+alias vim="nvim"
+alias v="nvim"
+alias vv="nvim ~/.vimrc"
+alias vz="nvim ~/.zshrc"
 alias sz="source ~/.zshrc"
 
 update_pacman_mirrorlist(){

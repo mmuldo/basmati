@@ -5,12 +5,15 @@ configuration {
 	width: 800;
 	lines: 15;
 	columns: 1;
+    bw: 0;
 	font: "{{ settings.font }} 14";
 	terminal: "alacritty";
 	ssh-client: "ssh";
 	ssh-command: "{terminal} -e "{ssh-client} {host}"";
-	icon-theme: "Paper";
+	icon-theme: "candy-icons";
+    show-icons: true;
 	theme: "launcher";
+    fake-transparency: false;
 	kb-delete-entry: "Shift+Delete,Alt+d";
 	kb-mode-next: "Shift+Right,Control+Tab,Alt+n";
 	kb-mode-previous: "Shift+Left,Control+ISO_Left_Tab,Alt+p";
