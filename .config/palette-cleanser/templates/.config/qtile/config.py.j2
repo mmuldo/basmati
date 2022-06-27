@@ -20,9 +20,8 @@ keys = [
         desc="restart qtile"),
     Key([mod, "shift"],
         "e",
-        # lazy.shutdown(), #TODO: change to rofi on/off
-        lazy.spawn(f"{os.environ['HOME']}/.local/bin/power-control"),
-        desc="shutdown qtile"),
+        lazy.spawn("archlinux-logout"),
+        desc="power options menu"),
 
     # launch terminal
     Key([mod],
@@ -51,10 +50,18 @@ keys = [
         "k",
         lazy.layout.up(),
         desc="move focus up"),
+
+    # toggle floating
     Key([mod],
         "space",
-        lazy.layout.next(),
-        desc="move focus to other window"),
+        lazy.window.toggle_floating(),
+        desc="snap window to/from floating"),
+
+    # toggle group
+    Key([mod],
+        "c",
+        lazy.screen.toggle_group(),
+        desc="snap window to/from floating"),
 
     # resize windows
     Key([mod],
@@ -88,6 +95,12 @@ keys = [
         lazy.window.toggle_fullscreen(),
         desc="toggle fullscreen"),
 
+    # switch layouts
+    Key([mod],
+        "v",
+        lazy.next_layout(),
+        desc="next layout"),
+
     # screen focus
     Key([mod],
         "w",
@@ -105,8 +118,8 @@ keys = [
     # pass
     Key([mod],
         "p",
-        lazy.spawn("passmenu"),
-        desc="passmenu"),
+        lazy.spawn("rofi-pass"),
+        desc="pass menu launcher"),
 
     # emojis
     Key([mod],
@@ -165,14 +178,14 @@ layouts = [
 
     for l, kwargs in {
             layout.MonadTall: {},
-            layout.Max: {}
+            layout.MonadWide: {},
     }.items()
 ]
 
 widget_defaults = dict(
     font="{{ settings.font }}",
     fontsize=14,
-    background="{{ palettes[0].colors[0] }}",
+    background="{{ palettes[1].colors[0] }}",
     foreground="{{ palettes[0].colors[7] }}",
     borderwidth=3,
     padding=5,
@@ -260,7 +273,7 @@ screens = [
             ],
             size=30,
             margin=[10, 10, 0, 10],
-            opacity=0.8
+            opacity=1
         ),
     ),
 ]

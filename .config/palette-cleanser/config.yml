@@ -1,10 +1,10 @@
 managed_files:
   - .config/alacritty/alacritty.yml
-  - .config/i3/config
-  - .config/picom/picom.conf
-  - .config/polybar/config
+  #- .config/i3/config
+  #- .config/picom/picom.conf
+  #- .config/polybar/config
   - .config/qtile
   - .config/rofi/config.rasi
   - .config/rofi/launcher.rasi
-  - .xmonad/xmonad.hs
+    #- .xmonad/xmonad.hs
   - .zshrc

@@ -8,46 +8,30 @@
 {% endfor %}
 
     separatorcolor: @color0;
-    background-color: @color0;
+    background-color: {{ palettes[1].colors[0] }};
+    text-color: {{ palettes[0].colors[3] }};
 }
 
 #window {
     border-color: {{ palettes[0].colors[3] }};
     border: 4;
     padding: 40px;
-    background-color: @color0;
-}
-
-#mainbox {
-    background-color: @color0;
-}
-
-#inputbar {
-    background-color: @color0;
 }
 
 #prompt {
-    background-color: @color0;
     text-color: {{ palettes[0].colors[1] }};
 }
 
-#entry {
-    background-color: @color0;
-    text-color: {{ palettes[0].colors[3] }};
-}
-
 #case-indicator {
-    background-color: @color0;
     text-color: @color14;
 }
 
 
 #element.selected.normal {
-    background-color: {{ palettes[1].colors[7] }};
-    text-color:       @color0;
+    background-color: {{ palettes[0].colors[3] }};
+    text-color:       {{ palettes[1].colors[0] }};
 }
 
 #element.normal {
-    background-color: @color0;
     text-color:       {{ palettes[1].colors[7] }};
 }
